@@ -359,6 +359,7 @@ public class BackpackWrapper implements IBackpackWrapper {
 			case COUNT -> InventorySorter.BY_COUNT;
 			case TAGS -> InventorySorter.BY_TAGS;
 			case NAME -> InventorySorter.BY_NAME;
+			case MOD -> InventorySorter.BY_MOD;
 		};
 	}
 

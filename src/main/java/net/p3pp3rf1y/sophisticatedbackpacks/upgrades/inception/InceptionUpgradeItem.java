@@ -12,14 +12,16 @@ import net.p3pp3rf1y.sophisticatedcore.util.InventoryHelper;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class InceptionUpgradeItem extends UpgradeItemBase<InceptionUpgradeWrapper> {
 	public static final UpgradeType<InceptionUpgradeWrapper> TYPE = new UpgradeType<>(InceptionUpgradeWrapper::new);
+	public static final List<UpgradeConflictDefinition> UPGRADE_CONFLICT_DEFINITIONS = List.of(new UpgradeConflictDefinition(InceptionUpgradeItem.class::isInstance, 0, SBPTranslationHelper.INSTANCE.translError("add.inception_exists")));
 
 	public InceptionUpgradeItem() {
-        super(Config.SERVER.maxUpgradesPerStorage);
-    }
+		super(Config.SERVER.maxUpgradesPerStorage);
+	}
 
 	@Override
 	public UpgradeType<InceptionUpgradeWrapper> getType() {
@@ -52,11 +54,25 @@ public class InceptionUpgradeItem extends UpgradeItemBase<InceptionUpgradeWrappe
 	}
 
 	@Override
+	public List<UpgradeConflictDefinition> getUpgradeConflicts() {
+		return UPGRADE_CONFLICT_DEFINITIONS;
+	}
+
+	@Override
 	public UpgradeSlotChangeResult canRemoveUpgradeFrom(IStorageWrapper storageWrapper, boolean isClientSide) {
 		Set<Integer> slots = InventoryHelper.getItemSlots(storageWrapper.getInventoryHandler(), stack -> stack.getItem() instanceof BackpackItem);
 		if (!slots.isEmpty()) {
 			return new UpgradeSlotChangeResult.Fail(SBPTranslationHelper.INSTANCE.translError("remove.inception_sub_backpack"), Collections.emptySet(), slots, Collections.emptySet());
 		}
 		return new UpgradeSlotChangeResult.Success();
+	}
+
+	@Override
+	public UpgradeSlotChangeResult canSwapUpgradeFor(ItemStack upgradeStackToPut, int upgradeSlot, IStorageWrapper storageWrapper, boolean isClientSide) {
+		if (upgradeStackToPut.getItem() == this) {
+			return new UpgradeSlotChangeResult.Success();
+		}
+
+		return canRemoveUpgradeFrom(storageWrapper, isClientSide);
 	}
 }
