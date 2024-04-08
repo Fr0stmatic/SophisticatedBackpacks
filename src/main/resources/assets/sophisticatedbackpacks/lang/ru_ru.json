@@ -192,6 +192,7 @@
     "gui.sophisticatedbackpacks.error.add.inception_exists": "В другом слоте рюкзака уже установлено улучшение «Внедрение»",
     "gui.sophisticatedbackpacks.error.remove.inception_sub_backpack": "В данном рюкзаке хранятся другие рюкзаки",
     "gui.sophisticatedbackpacks.error.add.tool_swapper_exists": "В другом слоте рюкзака уже установлено улучшение «Мультитул»",
+    "gui.sophisticatedbackpacks.error.add.everlasting_exists": "В другом слоте рюкзака уже установлено улучшение «Вечность»",
     "gui.sophisticatedbackpacks.settings.buttons.another_player_can_open.on": "Разрешить открывать другим игрокам",
     "gui.sophisticatedbackpacks.settings.buttons.another_player_can_open.on.tooltip": "При надетом на вас рюкзаке другой игрок сможет открыть его, нажав ПКМ по вашей спине",
     "gui.sophisticatedbackpacks.settings.buttons.another_player_can_open.off": "Запретить открывать другим игрокам",
